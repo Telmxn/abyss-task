@@ -443,3 +443,34 @@ body {
 .hidden {
   display: none;
 }
+
+.tooltip {
+  position: absolute;
+  display: block;
+  border-radius: 2px;
+  color: var(--white-color);
+  background-color: var(--grey-color);
+  padding: 5px 7px;
+  font-size: 13px;
+  min-width: 100px;
+  left: -28px;
+  bottom: -36px;
+  z-index: 9;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: " ";
+  position: absolute;
+  top: -15px;
+  left: 42px;
+  height: 10px;
+  border: 8px solid;
+  border-color: #ffffff00 #ffffff00 var(--grey-color) #ffffff00;
+}
+
+.s-btn:hover .tooltip {
+  opacity: 1;
+}
