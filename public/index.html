@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./Util.css" />
+    <link rel="stylesheet" href="./zoom.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Abyss Task</title>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="header d-flex justify-between">
+        <div class="head-title d-flex align-center">
+          Services
+          <div class="h-count" id="">0</div>
+        </div>
+        <div class="d-flex">
+          <button class="btn listView-btn mr-7" type="button">LIST VIEW</button>
+          <button class="btn s-btn mr-7 CenterDragElBtn">
+            <i class="fa fa-location-arrow"></i>
+          </button>
+          <div class="zoom-in-out d-flex">
+            <button
+              class="btn s-btn zoom-out BtnZoomOut"
+              data-zoom-item="DraggableArea"
+            >
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <div class="dropdown">
+              <div class="custom-select">
+                <select>
+                  <option value="0">25%</option>
+                  <option value="1">30%</option>
+                  <option value="2">40%</option>
+                  <option value="3">50%</option>
+                  <option value="4">60%</option>
+                  <option value="5">70%</option>
+                  <option value="6">80%</option>
+                  <option value="7">90%</option>
+                  <option value="8">100%</option>
+                  <option value="9">125%</option>
+                  <option value="10">150%</option>
+                </select>
+              </div>
+            </div>
+            <button
+              class="btn s-btn zoom-in BtnZoomIn"
+              data-zoom-item="DraggableArea"
+            >
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="drag-cont" id="dragContainer">
+          <button
+            class="btn drag-p-btn drag-up-btn btnChangePos BtnPosTop top-arrow"
+            type="button"
+          >
+            <i class="fa-solid fa-chevron-up"></i>
+          </button>
+
+          <button
+            class="btn drag-p-btn drag-down-btn btnChangePos BtnPosBottom bottom-arrow"
+            type="button"
+          >
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <button
+            class="btn drag-p-btn drag-right-btn btnChangePos BtnPosRight right-arrow"
+            type="button"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <button
+            class="btn drag-p-btn drag-left-btn btnChangePos BtnPosLeft left-arrow"
+            type="button"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="categories" id="DraggableArea">
+            <div class="d-flex align-center relative">
+              <div class="categories-b category-item border-dashed">
+                Categories
+              </div>
+              <button class="btn-2 create-category-btn addCategoryBtn">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+
+            <div class="v-line hidden" id="mainCategoryCont"></div>
+          </div>
+          <div class="add-modal hidden" id="AddModal">
+            <div class="modal-title">What do you want to create</div>
+            <div class="d-flex justify-center">
+              <button
+                class="btn mr-10 CloseModalBtn"
+                type="button"
+                id="CreateSubCategoryBtn"
+              >
+                CATEGORY
+              </button>
+              <button class="btn CloseModalBtn" type="button">SERVICE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./draggable.js"></script>
+    <script src="./script.js"></script>
+    <script src="./zoom.js"></script>
+    <!-- <script>
+      const dragCont = document.getElementById("dragContainer");
+      const dragArea = document.getElementById("DraggableArea");
+      const CenterDragElBtns = document.querySelectorAll(".CenterDragElBtn");
+
+      const btnsChangePos = document.querySelectorAll(".btnChangePos");
+
+      const dragDrop = new Draggable({
+        dragContainer: dragCont,
+        draggableEl: dragArea,
+        btnChangePostion: btnsChangePos,
+        CenterDragElBtns: CenterDragElBtns,
+        positionCount: 70,
+      });
+
+      dragDrop.createDraggableArea();
+
+      const AddModal = document.getElementById("AddModal");
+
+      const getModalPos = (TargetEl, TargetModal) => {
+        const TargetElPos = TargetEl.getBoundingClientRect();
+        const ScrollWidth = document.querySelector(".categories").scrollWidth;
+        const ScrollLeft = document.documentElement.scrollLeft;
+        const postionX = ScrollLeft + TargetElPos.x + 20;
+        TargetModal.style.left = `${postionX - 36}px`;
+        TargetModal.style.top = `${TargetElPos.top + 50}px`;
+      };
+
+      const openModelBtnEvntListener = () => {
+        document.querySelectorAll(".OpenModelBtn").forEach((OpenModelBtn) => {
+          OpenModelBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const Target = e.currentTarget;
+            const TargetModal = document.getElementById(
+              Target.getAttribute("data-modal")
+            );
+            AddModal.classList.remove("hidden");
+            getModalPos(Target, TargetModal);
+          });
+        });
+      };
+
+      openModelBtnEvntListener();
+
+      document.querySelectorAll(".CloseModalBtn").forEach((CloseModalBtn) => {
+        CloseModalBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          AddModal.classList.add("hidden");
+        });
+      });
+    </script> -->
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

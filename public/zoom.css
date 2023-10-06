@@ -1,0 +1,43 @@
+.zoomPercent25 {
+  transform: scale(0.2);
+}
+
+.zoomPercent30 {
+  transform: scale(0.3);
+}
+
+.zoomPercent40 {
+  transform: scale(0.4);
+}
+
+.zoomPercent50 {
+  transform: scale(0.5);
+}
+
+.zoomPercent60 {
+  transform: scale(0.6);
+}
+
+.zoomPercent70 {
+  transform: scale(0.7);
+}
+
+.zoomPercent80 {
+  transform: scale(0.8);
+}
+
+.zoomPercent90 {
+  transform: scale(0.9);
+}
+
+.zoomPercent100 {
+  transform: scale(1);
+}
+
+.zoomPercent125 {
+  transform: scale(1.25);
+}
+
+.zoomPercent150 {
+  transform: scale(1.5);
+}
